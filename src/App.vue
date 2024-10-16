@@ -1,26 +1,34 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="container">
+    <CardListView @selectCard="selectCard"/>
+    <CardDetailView v-if="selectedCardId" :id="selectedCardId"/>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import CardListView from './components/CardListView.vue';
+import CardDetailView from './components/CardDetailView.vue';
 
 export default {
-  name: 'App',
   components: {
-    HelloWorld
+    CardListView,
+    CardDetailView
+  },
+  data() {
+    return {
+      selectedCardId: null
+    };
+  },
+  methods: {
+    selectCard(id) {
+      this.selectedCardId = id;
+    }
   }
-}
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style scoped>
+.container {
+  display: flex;
 }
 </style>
